@@ -1,0 +1,128 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@RegistroBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi:             ~
+    #translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+    globals:
+        evento: '%evento%'
+        actividad1 : '%actividad1%'
+        actividad1m : '%actividad1m%'
+        actividad1v : '%actividad1v%'
+        actividad2: '%actividad2%'
+        actividad2m: '%actividad2m%'
+        actividad2v: '%actividad2v%'
+        actividad3: '%actividad3%'
+        actividad3m: '%actividad3m%'
+        actividad3v: '%actividad3v%'
+        actividad4: '%actividad4%'
+        actividad4m: '%actividad4m%'
+        actividad4v: '%actividad4v%'
+        actividad5: '%actividad5%'
+        actividad5m: '%actividad5m%'
+        actividad5v: '%actividad5v%'
+        actividad6: '%actividad6%'
+        actividad6m: '%actividad6m%'
+        actividad6v: '%actividad6v%'
+        actividad7: '%actividad7%'
+        actividad7m: '%actividad7m%'
+        actividad7v: '%actividad7v%'
+        actividad8: '%actividad8%'
+        actividad8m: '%actividad8m%'
+        actividad8v: '%actividad8v%'
+        actividad9: '%actividad9%'
+        actividad9m: '%actividad9m%'
+        actividad9v: '%actividad9v%'
+        actividad10: '%actividad10%'
+        actividad10m: '%actividad10m%'
+        actividad10v: '%actividad10v%'
+        actividad11: '%actividad11%'
+        actividad11m: '%actividad11m%'
+        actividad11v: '%actividad11v%'
+        actividad12: '%actividad12%'
+        actividad12m: '%actividad12m%'
+        actividad12v: '%actividad12v%'
+        actividad13: '%actividad13%'
+        actividad13m: '%actividad13m%'
+        actividad13v: '%actividad13v%'
+        actividad14: '%actividad14%'
+        actividad14m: '%actividad14m%'
+        actividad14v: '%actividad14v%'
+        actividad15: '%actividad15%'
+        actividad15m: '%actividad15m%'
+        actividad15v: '%actividad15v%'
+        actividad16: '%actividad16%'
+        actividad16m: '%actividad16m%'
+        actividad16v: '%actividad16v%'
+
+
+
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    encryption: "%mailer_encryption%"
+    port: "%mailer_port%"
+    spool:     { type: memory }
+    stream_options:
+        ssl:
+            verify_peer: false
+            verify_peer_name: false

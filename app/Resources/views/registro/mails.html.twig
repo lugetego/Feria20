@@ -1,0 +1,354 @@
+{% extends 'base.html.twig' %}
+
+
+{%  block body %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+                <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ path('admin')  }}">Administración</a></li>
+                                <li class="breadcrumb-item active">Correos por actividades</li>
+                        </ol>
+                </nav>
+        {% endif %}
+
+
+        <div class="row">
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad1}}</h5>
+                                        {% set actividad1mailm = totalm.actividad1mail | split(',') %}
+                                        {% set actividad1mailv = totalv.actividad1mail | split(',') %}
+                                        {% set mails1mv = actividad1mailm|merge(actividad1mailv) %}
+                                        {% set mails1 = [] %}
+                                        {% for mail in mails1mv %}
+                                                {% if mail not in mails1 %}
+                                                        {% set mails1 = mails1|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails1 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad2}}</h5>
+                                        {% set actividad2mailm = totalm.actividad2mail | split(',') %}
+                                        {% set actividad2mailv = totalv.actividad2mail | split(',') %}
+                                        {% set mails2mv = actividad2mailm|merge(actividad2mailv) %}
+                                        {% set mails2 = [] %}
+                                        {% for mail in mails2mv %}
+                                                {% if mail not in mails2 %}
+                                                        {% set mails2 = mails2|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails2 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad3}}</h5>
+                                        {% set actividad3mailm = totalm.actividad3mail | split(',') %}
+                                        {% set actividad3mailv = totalv.actividad3mail | split(',') %}
+                                        {% set mails3mv = actividad3mailm|merge(actividad3mailv) %}
+                                        {% set mails3 = [] %}
+                                        {% for mail in mails3mv %}
+                                                {% if mail not in mails3 %}
+                                                        {% set mails3 = mails3|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails3 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row mt-3">
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad4}}</h5>
+                                        {% set actividad4mailm = totalm.actividad4mail | split(',') %}
+                                        {% set actividad4mailv = totalv.actividad4mail | split(',') %}
+                                        {% set mails4mv = actividad4mailm|merge(actividad4mailv) %}
+                                        {% set mails4 = [] %}
+                                        {% for mail in mails4mv %}
+                                                {% if mail not in mails4 %}
+                                                        {% set mails4 = mails4|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails4 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad5}}</h5>
+                                        {% set actividad5mailm = totalm.actividad5mail | split(',') %}
+                                        {% set actividad5mailv = totalv.actividad5mail | split(',') %}
+                                        {% set mails5mv = actividad5mailm|merge(actividad5mailv) %}
+                                        {% set mails5 = [] %}
+                                        {% for mail in mails5mv %}
+                                                {% if mail not in mails5 %}
+                                                        {% set mails5 = mails5|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails5 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad6}}</h5>
+                                        {% set actividad6mailm = totalm.actividad6mail | split(',') %}
+                                        {% set actividad6mailv = totalv.actividad6mail | split(',') %}
+                                        {% set mails6mv = actividad6mailm|merge(actividad6mailv) %}
+                                        {% set mails6 = [] %}
+                                        {% for mail in mails6mv %}
+                                                {% if mail not in mails6 %}
+                                                        {% set mails6 = mails6|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails6 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row mt-3">
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad7}}</h5>
+                                        {% set actividad7mailm = totalm.actividad7mail | split(',') %}
+                                        {% set actividad7mailv = totalv.actividad7mail | split(',') %}
+                                        {% set mails7mv = actividad7mailm|merge(actividad7mailv) %}
+                                        {% set mails7 = [] %}
+                                        {% for mail in mails7mv %}
+                                                {% if mail not in mails7 %}
+                                                        {% set mails7 = mails7|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails7 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad8}}</h5>
+                                        {% set actividad8mailm = totalm.actividad8mail | split(',') %}
+                                        {% set actividad8mailv = totalv.actividad8mail | split(',') %}
+                                        {% set mails8mv = actividad8mailm|merge(actividad8mailv) %}
+                                        {% set mails8 = [] %}
+                                        {% for mail in mails8mv %}
+                                                {% if mail not in mails8 %}
+                                                        {% set mails8 = mails8|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails8 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad9}}</h5>
+                                        {% set actividad9mailm = totalm.actividad9mail | split(',') %}
+                                        {% set actividad9mailv = totalv.actividad9mail | split(',') %}
+                                        {% set mails9mv = actividad9mailm|merge(actividad9mailv) %}
+                                        {% set mails9 = [] %}
+                                        {% for mail in mails9mv %}
+                                                {% if mail not in mails9 %}
+                                                        {% set mails9 = mails9|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails9 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+        <div class="row mt-3">
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad10}}</h5>
+                                        {% set actividad10mailm = totalm.actividad10mail | split(',') %}
+                                        {% set actividad10mailv = totalv.actividad10mail | split(',') %}
+                                        {% set mails10mv = actividad10mailm|merge(actividad10mailv) %}
+                                        {% set mails10 = [] %}
+                                        {% for mail in mails10mv %}
+                                                {% if mail not in mails10 %}
+                                                        {% set mails10 = mails10|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails10 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad11}}</h5>
+                                        {% set actividad11mailm = totalm.actividad11mail | split(',') %}
+                                        {% set actividad11mailv = totalv.actividad11mail | split(',') %}
+                                        {% set mails11mv = actividad11mailm|merge(actividad11mailv) %}
+                                        {% set mails11 = [] %}
+                                        {% for mail in mails11mv %}
+                                                {% if mail not in mails11 %}
+                                                        {% set mails11 = mails11|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails11 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad12}}</h5>
+                                        {% set actividad12mailm = totalm.actividad12mail | split(',') %}
+                                        {% set actividad12mailv = totalv.actividad12mail | split(',') %}
+                                        {% set mails12mv = actividad12mailm|merge(actividad12mailv) %}
+                                        {% set mails12 = [] %}
+                                        {% for mail in mails12mv %}
+                                                {% if mail not in mails12 %}
+                                                        {% set mails12 = mails12|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails12 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <div class="row mt-3">
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad13}}</h5>
+                                        {% set actividad13mailm = totalm.actividad13mail | split(',') %}
+                                        {% set actividad13mailv = totalv.actividad13mail | split(',') %}
+                                        {% set mails13mv = actividad13mailm|merge(actividad13mailv) %}
+                                        {% set mails13 = [] %}
+                                        {% for mail in mails13mv %}
+                                                {% if mail not in mails13 %}
+                                                        {% set mails13 = mails13|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails13 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad14}}</h5>
+                                        {% set actividad14mailm = totalm.actividad14mail | split(',') %}
+                                        {% set actividad14mailv = totalv.actividad14mail | split(',') %}
+                                        {% set mails14mv = actividad14mailm|merge(actividad14mailv) %}
+                                        {% set mails14 = [] %}
+                                        {% for mail in mails14mv %}
+                                                {% if mail not in mails14 %}
+                                                        {% set mails14 = mails14|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails14 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad15}}</h5>
+                                        {% set actividad15mailm = totalm.actividad15mail | split(',') %}
+                                        {% set actividad15mailv = totalv.actividad15mail | split(',') %}
+                                        {% set mails15mv = actividad15mailm|merge(actividad15mailv) %}
+                                        {% set mails15 = [] %}
+                                        {% for mail in mails15mv %}
+                                                {% if mail not in mails15 %}
+                                                        {% set mails15 = mails15|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails15 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+        <div class="row mt-3">
+                <div class="col-4">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">{{actividad16}}</h5>
+                                        {% set actividad16mailm = totalm.actividad16mail | split(',') %}
+                                        {% set actividad16mailv = totalv.actividad16mail | split(',') %}
+                                        {% set mails16mv = actividad16mailm|merge(actividad16mailv) %}
+                                        {% set mails16 = [] %}
+                                        {% for mail in mails16mv %}
+                                                {% if mail not in mails16 %}
+                                                        {% set mails16 = mails16|merge([mail]) %}
+                                                {% endif %}
+                                        {% endfor %}
+                                        {% for mail in mails16 if mail %}
+                                                {% if loop.first == false  %},{% endif%}
+                                                {{ mail }}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
