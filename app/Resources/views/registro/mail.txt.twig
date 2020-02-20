@@ -1,0 +1,9 @@
+{{ evento }}
+Hemos recibido tu registro como {{ entity.tipo }}
+
+Nombre: {{ entity.nombre|title }} {{ entity.paterno|title }} {{ entity.materno|title }}
+Correo: {{ entity.mail }}
+Institución: {{ entity.institucion }}
+{% if entity.tipo == 'voluntario' %}
+Carrera: {{ entity.carrera }}
+{% endif %}

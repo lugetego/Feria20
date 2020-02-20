@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="container">
+        <div class="jumbotron">
+            <h4><i class="fa fa-check"></i> {{ entity.nombre|title }} {{ entity.paterno|title }} {{ entity.materno|title }}
+                hemos recibido tu registro.</h4>
+            <p class="lead">Te enviaremos un correo a la dirección que nos proporcionaste: <strong><i>{{ entity.mail }}</i></strong></p>
+            <hr class="my-4">
+            <p>Si no recibes el correo de confirmación puedes verificar en tu bandeja de correos no deseados, si no lo has recibido puedes escribir a <strong>webmaster<i class="fa fa-at"></i>matmor.unam.mx</i></strong> para confirmar tu registro.</p>
+            <a class="btn btn-primary btn-sm" href="http://www.matmor.unam.mx/feria-matematica" role="button">Finalizar</a>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

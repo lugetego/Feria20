@@ -1,0 +1,590 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme edit_form 'registro/form_errors.html.twig' %}
+
+{% block nav %}
+
+{% endblock %}
+{% block body %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('admin')  }}">Administración</a></li>
+                <li class="breadcrumb-item active">{{ registro.nombre|title}} {{ registro.paterno|title}} {{ registro.materno }}</li>
+            </ol>
+        </nav>
+    {% endif %}
+
+    {% if app.session.flashbag.has('notice') %}
+
+        <div class="jumbotron">
+            <h3><i class="fa fa-check" aria-hidden="true"></i> {{ app.session.flashbag.get('notice').0 }}</h3>
+            <p class="lead">Se ha enviado un correo de confirmación a la dirección que nos proporcionaste: <strong>{{ registro.mail }}</strong></p>
+            <hr class="my-4">
+            <p>Hemos recibido la siguiente información:</p>
+            <p><strong>Nombre</strong>: <span class="label label-success">{{ registro.nombre|title }} {{ registro.paterno|title }} {{ registro.materno|title }}</span></p>
+            <p><strong>Actividad horario matutino: </strong>
+                {% for key,value in registro.actividadm if value %}
+                    {% if key == 'actividad1' %}
+                        <span class="badge badge-success">{{ actividad1 }}</span>
+                    {% elseif key == 'actividad2' %}
+                        <span class="badge badge-success">{{ actividad2 }}</span>
+                    {% elseif key == 'actividad3' %}
+                        <span class="badge badge-success">{{ actividad3  }}</span>
+                    {% elseif key == 'actividad4' %}
+                        <span class="badge badge-success">{{ actividad4  }}</span>
+                    {% elseif key == 'actividad5' %}
+                        <span class="badge badge-success">{{ actividad5  }}</span>
+                    {% elseif key == 'actividad6' %}
+                        <span class="badge badge-success">{{ actividad6  }}</span>
+                    {% elseif key == 'actividad7' %}
+                        <span class="badge badge-success">{{ actividad7  }}</span>
+                    {% elseif key == 'actividad8' %}
+                        <span class="badge badge-success">{{ actividad8 }}</span>
+                    {% elseif key == 'actividad9' %}
+                        <span class="badge badge-success">{{ actividad9 }}</span>
+                    {% elseif key == 'actividad10' %}
+                        <span class="badge badge-success">{{ actividad10 }}</span>
+                    {% elseif key == 'actividad11' %}
+                        <span class="badge badge-success">{{ actividad11 }}</span>
+                    {% elseif key == 'actividad12' %}
+                        <span class="badge badge-success">{{ actividad12 }}</span>
+                    {% elseif key == 'actividad13' %}
+                        <span class="badge badge-success">{{ actividad13 }}</span>
+                    {% elseif key == 'actividad14' %}
+                        <span class="badge badge-success">{{ actividad14 }}</span>
+                    {% elseif key == 'actividad15' %}
+                        <span class="badge badge-success">{{ actividad15 }}</span>
+                        {#                    {% elseif key == 'actividad16' %}#}
+                        {#                        <span class="badge badge-success">{{ actividad16 }}</span>#}
+                    {% endif %}
+                {% endfor %}
+            </p>
+            <p><strong>Actividad horario vespertino: </strong>
+                {% for key,value in registro.actividadv if value %}
+                    {% if key == 'actividad1' %}
+                        <span class="badge badge-success">{{ actividad1 }}</span>
+                    {% elseif key == 'actividad2' %}
+                        <span class="badge badge-success">{{ actividad2 }}</span>
+                    {% elseif key == 'actividad3' %}
+                        <span class="badge badge-success">{{ actividad3  }}</span>
+                    {% elseif key == 'actividad4' %}
+                        <span class="badge badge-success">{{ actividad4  }}</span>
+                    {% elseif key == 'actividad5' %}
+                        <span class="badge badge-success">{{ actividad5  }}</span>
+                    {% elseif key == 'actividad6' %}
+                        <span class="badge badge-success">{{ actividad6  }}</span>
+                    {% elseif key == 'actividad7' %}
+                        <span class="badge badge-success">{{ actividad7  }}</span>
+                    {% elseif key == 'actividad8' %}
+                        <span class="badge badge-success">{{ actividad8 }}</span>
+                    {% elseif key == 'actividad9' %}
+                        <span class="badge badge-success">{{ actividad9 }}</span>
+                    {% elseif key == 'actividad10' %}
+                        <span class="badge badge-success">{{ actividad10 }}</span>
+                    {% elseif key == 'actividad11' %}
+                        <span class="badge badge-success">{{ actividad11 }}</span>
+                    {% elseif key == 'actividad12' %}
+                        <span class="badge badge-success">{{ actividad12 }}</span>
+                    {% elseif key == 'actividad13' %}
+                        <span class="badge badge-success">{{ actividad13 }}</span>
+                    {% elseif key == 'actividad14' %}
+                        <span class="badge badge-success">{{ actividad14 }}</span>
+                    {% elseif key == 'actividad15' %}
+                        <span class="badge badge-success">{{ actividad15 }}</span>
+                    {% elseif key == 'actividad16' %}
+                        <span class="badge badge-success">{{ actividad16 }}</span>
+                    {% endif %}
+                {% endfor %}
+            </p>
+            <p><strong>¿Deseas comida vegetariana?:</strong>
+                {% if registro.comida == true %}
+                    <span class="badge badge-success">Si</span>
+                {% else %}
+                    <span class="badge badge-danger">No</span>
+                {% endif %}
+            </p>
+            <p><strong>Playera:</strong>
+                {% if registro.sexo == true %}
+                    <span class="badge badge-success">Hombre</span>
+                {% else %}
+                    <span class="badge badge-success">Mujer</span>
+                {% endif %}
+                <span class="badge badge-success">{{ registro.playera }}</span>
+            </p>
+            <br>
+            <p class="text-justify">En caso de no recibir este correo de confirmación, puedes verificar en tu
+                bandeja de correos no deseados o escribir al correo <br><i>webmaster<i class="fa fa-at"></i>matmor.unam.mx</i> para validar que hayamos recibido tu información.</p>
+            <a class="btn btn-primary" href="http://www.matmor.unam.mx/feria-matematica" role="button">Finalizar</a>
+        </div>
+
+    {% else %}
+
+        {{ form_start(edit_form, {'action': path('registro_edit',{'id':registro.id, 'mail':registro.mail})}) }}
+
+        {% if registro.tipo == 'voluntario' %}
+            <div class="card bg-light mb-3">
+                <div class="card-header">{{ evento }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">A través de este formulario podrás integrarte a las actividades de la {{ evento }}</h5>
+                    <p class="card-text text-justify font-weight-light">
+                        <i class="fa fa-check-circle font-weight-light" aria-hidden="true"></i> Puedes seleccionar una actividad por cada horario (matutino, vespertino).<br>
+                        <i class="fa fa-check-circle font-weight-light" aria-hidden="true"></i> En cada actividad se indicará la cantidad de <span class="label label-success">lugares disponibles.</span>
+                        También se indicará cuando la actividad <span class="label label-danger">tenga pocos o no tenga lugares disponibles</span><br>
+                        <i class="fa fa-check-circle font-weight-light" aria-hidden="true"></i> Una vez que enviés el formulario ya no será posible modificar tu regsitro.<br>
+                        <i class="fa fa-check-circle font-weight-light" aria-hidden="true"></i> Después de enviar el formulario recibirás un correo de confirmación a la dirección que nos proporcionaste,
+                        de no ser así puedes escribir a <br><strong>webmaster<i class="fa fa-at"></i>matmor.unam.mx</strong> para confirmar que se haya actualizado tu
+                        información.
+                    </p>
+                </div>
+            </div>
+        {% else %}
+            <div class="card bg-light mb-3">
+                <div class="card-header">{{ evento }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">A través de este formulario podrás completar tu registro como coordinador en la {{ evento }}</h5>
+                    <p class="card-text text-justify font-weight-light">
+                        <i class="fa fa-check-circle font-weight-light" aria-hidden="true"></i> Favor de completar el siguiente formulario.<br>
+                        <i class="fa fa-check-circle font-weight-light" aria-hidden="true"></i> Una vez que enviés el formulario ya no será posible modificar tu regsitro.<br>
+                        <i class="fa fa-check-circle font-weight-light" aria-hidden="true"></i> Después de enviar el formulario recibirás un correo de confirmación a la dirección que nos proporcionaste,
+                        de no ser así puedes escribir a <br><strong>webmaster<i class="fa fa-at"></i>matmor.unam.mx</strong> para confirmar que se haya actualizado tu
+                        información.
+                    </p>
+                </div>
+            </div>
+
+        {% endif %}
+
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 ">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {% if registro.nombre is not null or registro.nombre is not empty %}
+                                    {{ registro.nombre }} {{ registro.paterno }} {{ registro.materno }}<em> <small>{{ registro.mail}}
+                                        {{ registro.institucion }}, {{ registro.carrera }}</small></em>
+                                {% endif %}
+                            </h5>
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <div class="font-weight-light">{{ form_label(edit_form.comida) }}</div>
+                                        <div>
+                                            {% spaceless %}
+                                                {% for child in edit_form.comida %}
+                                                    <div class="form-check-inline">
+                                                        {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn font-weight-light'}}) }}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endspaceless %}
+                                        </div>
+                                        <div>{{ form_errors(edit_form.comida) }}</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <div class="font-weight-light">{{ form_label(edit_form.sexo) }}</div>
+                                        <div>
+                                            {% spaceless %}
+                                                {% for child in edit_form.sexo %}
+                                                    <div class="form-check-inline">
+                                                        {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn font-weight-light'}}) }}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endspaceless %}
+                                        </div>
+                                        <div>{{ form_errors(edit_form.sexo) }}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <div class="form-group">
+                                        <div class="font-weight-light">{{ form_label(edit_form.playera) }}</div>
+                                        <div>{{ form_widget(edit_form.playera, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                                        <div>{{ form_errors(edit_form.playera) }}</div><br>
+                                    </div>
+                                </div>
+
+                                {% if edit_form.activo is defined %}
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <div class="font-weight-light">{{ form_label(edit_form.activo) }}</div>
+                                            <div>
+                                                {% spaceless %}
+                                                    {% for child in edit_form.activo %}
+                                                        <div class="form-check-inline">
+                                                            {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn font-weight-light'}}) }}
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endspaceless %}
+                                            </div>
+                                            <div>{{ form_errors(edit_form.activo) }}</div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pt-3">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                {{ form_errors(edit_form) }}
+                                {% for flashMessage in app.session.flashbag.get('error') %}
+                                    <span class=" label label-danger"> <i class="fa fa-times"></i> {{ flashMessage }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        {% if registro.tipo == 'voluntario' %}
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Actividades</h5>
+                                        <p class="text-card">Selecciona una actividad para cada horario</p>
+                                        <ul class="nav nav-pills nav-justified mb-3">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Horario matutino</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Horario vespertino</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                <p class="text-card">Selecciona una actividad para el horario <mark>matutino</mark></p>
+                                                <div class="row">
+                                                    <div class="col-6" >
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad1) }}
+                                                            {{ form_label(edit_form.actividadm.actividad1) }}
+                                                            {% if totalm.actividad1 < actividad1m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad1 }} de {{ actividad1m }}</span>
+                                                            {% else %}
+                                                                <span class="label label-danger">{{ totalm.actividad1 }} de {{ actividad1m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad2) }}
+                                                            {{ form_label(edit_form.actividadm.actividad2) }}
+                                                            {% if totalm.actividad2< actividad2m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad2 }} de {{ actividad2m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad2 }} de {{ actividad2m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad3) }}
+                                                            {{ form_label(edit_form.actividadm.actividad3) }}
+                                                            {% if totalm.actividad3< actividad3m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad3 }} de {{ actividad3m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad3 }} de {{ actividad3m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad4) }}
+                                                            {{ form_label(edit_form.actividadm.actividad4) }}
+                                                            {% if totalm.actividad4< actividad4m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad4 }} de {{ actividad4m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad4 }} de {{ actividad4m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad5) }}
+                                                            {{ form_label(edit_form.actividadm.actividad5) }}
+                                                            {% if totalm.actividad5< actividad5m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad5 }} de {{ actividad5m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad5 }} de {{ actividad5m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad6) }}
+                                                            {{ form_label(edit_form.actividadm.actividad6) }}
+                                                            {% if totalm.actividad6< actividad6m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad6 }} de {{ actividad6m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad6 }} de {{ actividad6m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad7) }}
+                                                            {{ form_label(edit_form.actividadm.actividad7) }}
+                                                            {% if totalm.actividad7< actividad7m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad7 }} de {{ actividad7m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad7 }} de {{ actividad7m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad8) }}
+                                                            {{ form_label(edit_form.actividadm.actividad8) }}
+                                                            {% if totalm.actividad8< actividad8m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad8 }} de {{ actividad8m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad8 }} de {{ actividad8m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6" >
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad9) }}
+                                                            {{ form_label(edit_form.actividadm.actividad9) }}
+                                                            {% if totalm.actividad9< actividad9m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad9 }} de {{ actividad9m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad9 }} de {{ actividad9m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad10) }}
+                                                            {{ form_label(edit_form.actividadm.actividad10) }}
+                                                            {% if totalm.actividad10< actividad10m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad10 }} de {{ actividad10m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad10 }} de {{ actividad10m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad11) }}
+                                                            {{ form_label(edit_form.actividadm.actividad11) }}
+                                                            {% if totalm.actividad11< actividad11m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad11 }} de {{ actividad11m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad11 }} de {{ actividad11m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad12) }}
+                                                            {{ form_label(edit_form.actividadm.actividad12) }}
+                                                            {% if totalm.actividad12< actividad12m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad12 }} de {{ actividad12m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad12 }} de {{ actividad12m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad13) }}
+                                                            {{ form_label(edit_form.actividadm.actividad13) }}
+                                                            {% if totalm.actividad13< actividad13m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad13 }} de {{ actividad13m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad13 }} de {{ actividad13m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad14) }}
+                                                            {{ form_label(edit_form.actividadm.actividad14) }}
+                                                            {% if totalm.actividad14< actividad14m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad14 }} de {{ actividad14m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad14 }} de {{ actividad14m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad15) }}
+                                                            {{ form_label(edit_form.actividadm.actividad15) }}
+                                                            {% if totalm.actividad15< actividad15m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad15 }} de {{ actividad15m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad15 }} de {{ actividad15m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadm.actividad16) }}
+                                                            {{ form_label(edit_form.actividadm.actividad16) }}
+                                                            {% if totalm.actividad16< actividad16m %}
+                                                                <span class="badge badge-pill badge-success">{{ totalm.actividad16 }} de {{ actividad16m }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalm.actividad16 }} de {{ actividad16m }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <p class="text-card">Selecciona una actividad para el horario <mark>vespertino</mark></p>
+                                                <div class="row">
+                                                    <div class="col-6" >
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad1) }}
+                                                            {{ form_label(edit_form.actividadv.actividad1) }}
+                                                            {% if totalv.actividad1 < actividad1v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad1 }} de {{ actividad1v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad1 }} de {{ actividad1v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad2) }}
+                                                            {{ form_label(edit_form.actividadv.actividad2) }}
+                                                            {% if totalv.actividad2 < actividad2v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad2 }} de {{ actividad2v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad2 }} de {{ actividad2v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad3) }}
+                                                            {{ form_label(edit_form.actividadv.actividad3) }}
+                                                            {% if totalv.actividad3 < actividad3v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad3 }} de {{ actividad3v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad3 }} de {{ actividad3v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad4) }}
+                                                            {{ form_label(edit_form.actividadv.actividad4) }}
+                                                            {% if totalv.actividad4 < actividad4v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad4 }} de {{ actividad4v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad4 }} de {{ actividad4v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad5) }}
+                                                            {{ form_label(edit_form.actividadv.actividad5) }}
+                                                            {% if totalv.actividad5 < actividad5v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad5 }} de {{ actividad5v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad5 }} de {{ actividad5v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad6) }}
+                                                            {{ form_label(edit_form.actividadv.actividad6) }}
+                                                            {% if totalv.actividad6 < actividad6v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad6 }} de {{ actividad6v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad6 }} de {{ actividad6v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad7) }}
+                                                            {{ form_label(edit_form.actividadv.actividad7) }}
+                                                            {% if totalv.actividad7 < actividad7v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad7 }} de {{ actividad7v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad7 }} de {{ actividad7v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad8) }}
+                                                            {{ form_label(edit_form.actividadv.actividad8) }}
+                                                            {% if totalv.actividad8 < actividad8v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad8 }} de {{ actividad8v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad8 }} de {{ actividad8v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6" >
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad9) }}
+                                                            {{ form_label(edit_form.actividadv.actividad9) }}
+                                                            {% if totalv.actividad9 < actividad9v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad9 }} de {{ actividad9v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad9 }} de {{ actividad9v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad10) }}
+                                                            {{ form_label(edit_form.actividadv.actividad10) }}
+                                                            {% if totalv.actividad10 < actividad10v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad10 }} de {{ actividad10v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad10 }} de {{ actividad10v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad11) }}
+                                                            {{ form_label(edit_form.actividadv.actividad11) }}
+                                                            {% if totalv.actividad11 < actividad11v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad11 }} de {{ actividad11v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad11 }} de {{ actividad11v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad12) }}
+                                                            {{ form_label(edit_form.actividadv.actividad12) }}
+                                                            {% if totalv.actividad12 < actividad12v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad12 }} de {{ actividad12v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad12 }} de {{ actividad12v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad13) }}
+                                                            {{ form_label(edit_form.actividadv.actividad13) }}
+                                                            {% if totalv.actividad13 < actividad13v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad13 }} de {{ actividad13v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad13 }} de {{ actividad13v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad14) }}
+                                                            {{ form_label(edit_form.actividadv.actividad14) }}
+                                                            {% if totalv.actividad14 < actividad14v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad14 }} de {{ actividad14v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad14 }} de {{ actividad14v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad15) }}
+                                                            {{ form_label(edit_form.actividadv.actividad15) }}
+                                                            {% if totalv.actividad15 < actividad15v %}
+                                                                <span class="badge badge-pill badge-success"> {{ totalv.actividad15 }} de {{ actividad15v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad15 }} de {{ actividad15v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="font-weight-light">
+                                                            {{ form_widget(edit_form.actividadv.actividad16) }}
+                                                            {{ form_label(edit_form.actividadv.actividad16) }}
+                                                            {% if totalv.actividad16 < actividad16v %}
+                                                                <span class="badge badge-pill badge-success">{{ totalv.actividad16 }} de {{ actividad16v }}</span>
+                                                            {% else %}
+                                                                <span class="badge badge-pill badge-danger">{{ totalv.actividad16 }} de {{ actividad16v }}</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% if registro.actividadm|length == 0 and registro.actividadv|length == 0 or is_granted('ROLE_ADMIN') %}
+                <div class="row mt-3">
+                    <div class="col text-center">
+                        <input type="submit" value="Modificar registro" class="btn btn-primary" />
+                    </div>
+                </div>
+            {% endif %}
+            {{ form_end(edit_form) }}
+        </div>
+
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

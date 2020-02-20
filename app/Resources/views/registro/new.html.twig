@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'registro/form_errors.html.twig' %}
+
+{% block body %}
+
+    <h1 class="font-weight-normal">Registro de {{tipo}}</h1>
+    <div class="alert alert-light" role="alert">
+        <p><i class="fa fa-check"></i> El nombre con el que te registres será el que aparezca en tu constancia de participación.</p>
+        <p><i class="fa fa-check"></i> El registro que realices será asociado a tu cuenta de correo.</p>
+        <p><i class="fa fa-envelope"></i> Si tienes algún problema con el formulario de registro puedes escribir a:
+            <strong>webmaster<i class="fa fa-at"></i>matmor.unam.mx</strong></p>
+    </div>
+    {% if tipo == 'voluntario' %}
+        {{ form_start(form, {'action': path('registro_new')}) }}
+    {% else %}
+        {{ form_start(form, {'action': path('registro_coordi')}) }}
+    {% endif %}
+
+    {{ form_errors(form) }}
+
+    <form>
+        <div class="form-row">
+            <div class="form-group col-4">
+                <div>
+                    {{ form_label(form.nombre) }}
+                </div>
+                <div>
+                    {{ form_widget(form.nombre, {'attr': {'class': 'form-control'} } )  }}
+                    {{ form_errors(form.nombre) }}
+                </div>
+            </div>
+            <div class="form-group col-4">
+                <div>
+                    {{ form_label(form.paterno) }}
+                </div>
+                <div>
+                    {{ form_widget(form.paterno, {'attr': {'class': 'form-control'} } )  }}
+                </div>
+                <div>{{ form_errors(form.paterno) }}</div>
+            </div>
+            <div class="form-group col-4">
+                <div>
+                    {{ form_label(form.materno) }}
+                </div>
+                <div>
+                    {{ form_widget(form.materno, {'attr': {'class': 'form-control'} } )  }}
+                </div>
+                <div>{{ form_errors(form.materno) }}</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-4">
+                <div>{{ form_row(form.mail.first, {'attr': {'class': 'form-control'} } ) }}</div>
+            </div>
+            <div class="form-group col-4">
+                <div>{{ form_row(form.mail.second, {'attr': {'class': 'form-control'} } ) }}</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-4">
+                <div>{{ form_label(form.instituciones) }}</div>
+                <div>{{ form_widget(form.instituciones, {'attr': {'class': 'form-control'} } ) }}</div>
+                <div>{{ form_errors(form.instituciones) }}</div>
+            </div>
+            <div class="form-group col-4">
+                <div>{{ form_label(form.institucion) }}</div>
+                <div>{{ form_widget(form.institucion, {'attr': {'class': 'form-control', 'placeholder':'Escribe el nombre de tu Institución'} } ) }}</div>
+                <div>{{ form_errors(form.institucion) }}</div>
+            </div>
+            {% if form.carrera is defined %}
+                <div class="form-group col-4">
+                    <div>{{ form_label(form.carrera) }}</div>
+                    <div>{{ form_widget(form.carrera, {'attr': {'class': 'form-control input-sm'} } ) }}</div>
+                    <div>{{ form_errors(form.carrera) }}</div>
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="form-row">
+            <div class="pt-4">
+                <button type="submit" class="btn btn-primary">Enviar registro</button>
+            </div>
+        </div>
+
+        {#        {% if form.actividadm is defined %}#}
+        {#            <div>{{ form_label(form.actividadm) }}</div>#}
+        {#        {% endif %}#}
+        {{ form_end(form) }}
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="{{ asset('js/onChange.js')}}"></script>
+{% endblock %}
+
+
+
+
+

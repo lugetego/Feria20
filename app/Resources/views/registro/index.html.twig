@@ -1,0 +1,869 @@
+{% extends 'base.html.twig' %}
+
+    {#{% block nav %}#}
+    {#    <li class="active"><a href="#">Registros</a></li>#}
+    {#    <li><a data-toggle="modal" data-target="#correos">Correos</a></li>#}
+    {#{% endblock %}#}
+
+    {#{% block navr %}#}
+    {#    <li class="active"><a href="{{ path('logout') }}">Logout<span class="sr-only">(current)</span></a></li>#}
+    {#{% endblock %}#}
+
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/datatables.min.css"/>
+{% endblock %}
+{% block nav %}
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">{{ evento }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExample02">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{path('mails')}}"><i class="fa fa-envelope"></i> Correos <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+
+    {% block bodyadmin %}
+        <div class="container-fluid pt-3">
+            <div class="row">
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row ">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad1 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad1xm = (totalm.actividad1*100)/actividad1m %}
+                                    {% set actividad1xv = (totalv.actividad1*100)/actividad1v %}
+                                    <small>M: {{ totalm.actividad1 }} de {{ actividad1m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad1xm > 0 and actividad1xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad1xm }}%"></div>
+                                        {% elseif actividad1xm > 33.33 and actividad1xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad1xm }}%"></div>
+                                        {% elseif actividad1xm > 66.66  and actividad1xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad1xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small> V: {{ totalv.actividad1 }} de {{ actividad1v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad1xv > 0 and actividad1xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad1xv }}%"></div>
+                                        {% elseif actividad1xv > 33.33 and actividad1xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad1xv }}%"></div>
+                                        {% elseif actividad1xv > 66.66  and actividad1xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad1xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad2 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad2xm = (totalm.actividad2*100)/actividad2m %}
+                                    {% set actividad2xv = (totalv.actividad2*100)/actividad2v %}
+                                    <small>M: {{ totalm.actividad2 }} de {{ actividad2m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad2xm > 0 and actividad2xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad2xm }}%"></div>
+                                        {% elseif actividad2xm > 33.33 and actividad2xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad2xm }}%"></div>
+                                        {% elseif actividad2xm > 66.66  and actividad2xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad2xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small> V: {{ totalv.actividad2 }} de {{ actividad2v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad2xv > 0 and actividad2xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad2xv }}%"></div>
+                                        {% elseif actividad2xv > 33.33 and actividad2xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad2xv }}%"></div>
+                                        {% elseif actividad2xv > 66.66  and actividad2xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad2xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad3 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad3xm = (totalm.actividad3*100)/actividad3m %}
+                                    {% set actividad3xv = (totalv.actividad3*100)/actividad3v %}
+                                    <small>M: {{ totalm.actividad3 }} de {{ actividad3m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad3xm > 0 and actividad3xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad3xm }}%"></div>
+                                        {% elseif actividad3xm > 33.33 and actividad3xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad3xm }}%"></div>
+                                        {% elseif actividad3xm > 66.66  and actividad3xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad3xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small>V: {{ totalv.actividad3 }} de {{ actividad3v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad3xv > 0 and actividad3xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad3xv }}%"></div>
+                                        {% elseif actividad3xv > 33.33 and actividad3xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad3xv }}%"></div>
+                                        {% elseif actividad3xv > 66.66  and actividad3xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad3xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad4 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad4xm = (totalm.actividad4*100)/actividad4m %}
+                                    {% set actividad4xv = (totalv.actividad4*100)/actividad4v %}
+                                    <small>M: {{ totalm.actividad4 }} de {{ actividad4m }}</small>
+                                    <div class="progress progress-mini">
+                                        {% if  actividad4xm > 0 and actividad4xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad4xm }}%"></div>
+                                        {% elseif actividad4xm > 33.33 and actividad4xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad4xm }}%"></div>
+                                        {% elseif actividad4xm > 66.66  and actividad4xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad4xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small> V: {{ totalv.actividad4 }} de {{ actividad4v }}</small>
+                                    <div class="progress progress-mini">
+                                        {% if  actividad4xv > 0 and actividad4xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad4xv }}%"></div>
+                                        {% elseif actividad4xv > 33.33 and actividad4xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad4xv }}%"></div>
+                                        {% elseif actividad4xv > 66.66  and actividad4xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad4xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad5 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad5xm = (totalm.actividad5*100)/actividad5m %}
+                                    {% set actividad5xv = (totalv.actividad5*100)/actividad5v %}
+                                    <small>M: {{ totalm.actividad5 }} de {{ actividad5m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad5xm > 0 and actividad5xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad5xm }}%"></div>
+                                        {% elseif actividad5xm > 33.33 and actividad5xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad5xm }}%"></div>
+                                        {% elseif actividad5xm > 66.66  and actividad5xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad5xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small>V: {{ totalv.actividad5 }} de {{ actividad5v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad5xv > 0 and actividad5xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad5xv }}%"></div>
+                                        {% elseif actividad5xv > 33.33 and actividad5xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad5xv }}%"></div>
+                                        {% elseif actividad5xv > 66.66  and actividad5xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad5xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad6 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad6xm = (totalm.actividad6*100)/actividad6m %}
+                                    {% set actividad6xv = (totalv.actividad6*100)/actividad6v %}
+                                    <small>M: {{ totalm.actividad6 }} de {{ actividad6m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad6xm > 0 and actividad6xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad6xm }}%"></div>
+                                        {% elseif actividad6xm > 33.33 and actividad6xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad6xm }}%"></div>
+                                        {% elseif actividad6xm > 66.66  and actividad6xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad6xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small>V: {{ totalv.actividad6 }} de {{ actividad6v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad6xv > 0 and actividad6xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad6xv }}%"></div>
+                                        {% elseif actividad6xv > 33.33 and actividad6xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad6xv }}%"></div>
+                                        {% elseif actividad6xv > 66.66  and actividad6xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad6xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad7 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad7xm = (totalm.actividad7*100)/actividad7m %}
+                                    {% set actividad7xv = (totalv.actividad7*100)/actividad7v %}
+                                    <small>M: {{ totalm.actividad7 }} de {{ actividad7m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad7xm > 0 and actividad7xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad7xm }}%"></div>
+                                        {% elseif actividad7xm > 33.33 and actividad7xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad7xm }}%"></div>
+                                        {% elseif actividad7xm > 66.66  and actividad7xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad7xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+                                    <small>V: {{ totalv.actividad7 }} de {{ actividad7v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad7xv > 0 and actividad7xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad7xv }}%"></div>
+                                        {% elseif actividad7xv > 33.33 and actividad7xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad7xv }}%"></div>
+                                        {% elseif actividad7xv > 66.66  and actividad7xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad7xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad8 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad8xm = (totalm.actividad8*100)/actividad8m %}
+                                    {% set actividad8xv = (totalv.actividad8*100)/actividad8v %}
+                                    <small>M: {{ totalm.actividad8 }} de {{ actividad8m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad8xm > 0 and actividad8xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad8xm }}%"></div>
+                                        {% elseif actividad8xm > 33.33 and actividad8xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad8xm }}%"></div>
+                                        {% elseif actividad8xm > 66.66  and actividad8xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad8xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+                                    <small>V: {{ totalv.actividad8 }} de {{ actividad8v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad8xv > 0 and actividad8xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad8xv }}%"></div>
+                                        {% elseif actividad8xv > 33.33 and actividad8xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad8xv }}%"></div>
+                                        {% elseif actividad8xv > 66.66  and actividad8xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad8xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad9 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad9xm = (totalm.actividad9*100)/actividad9m %}
+                                    {% set actividad9xv = (totalv.actividad9*100)/actividad9v %}
+                                    <small>M: {{ totalm.actividad9 }} de {{ actividad9m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad9xm > 0 and actividad9xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad9xm }}%"></div>
+                                        {% elseif actividad9xm > 33.33 and actividad9xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad9xm }}%"></div>
+                                        {% elseif actividad9xm > 66.66  and actividad9xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad9xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+                                    <small> V: {{ totalv.actividad9 }} de {{ actividad9v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad9xv > 0 and actividad9xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad9xv }}%"></div>
+                                        {% elseif actividad9xv > 33.33 and actividad9xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad9xv }}%"></div>
+                                        {% elseif actividad9xv > 66.66  and actividad9xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad9xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad10 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad10xm = (totalm.actividad10*100)/actividad10m %}
+                                    {% set actividad10xv = (totalv.actividad10*100)/actividad10v %}
+                                    <small>M: {{ totalm.actividad10 }} de {{ actividad10m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad10xm > 0 and actividad10xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad10xm }}%"></div>
+                                        {% elseif actividad10xm > 33.33 and actividad10xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad10xm }}%"></div>
+                                        {% elseif actividad10xm > 66.66  and actividad10xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad10xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small> V: {{ totalv.actividad10 }} de {{ actividad10v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad10xv > 0 and actividad10xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad10xv }}%"></div>
+                                        {% elseif actividad10xv > 33.33 and actividad10xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad10xv }}%"></div>
+                                        {% elseif actividad10xv > 66.66  and actividad10xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad10xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad11 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad11xm = (totalm.actividad11*100)/actividad11m %}
+                                    {% set actividad11xv = (totalv.actividad11*100)/actividad11v %}
+                                    <small>M: {{ totalm.actividad11 }} de {{ actividad11m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad11xm > 0 and actividad11xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad11xm }}%"></div>
+                                        {% elseif actividad11xm > 33.33 and actividad11xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad11xm }}%"></div>
+                                        {% elseif actividad11xm > 66.66  and actividad11xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad11xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small>V: {{ totalv.actividad11 }} de {{ actividad11v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad11xv > 0 and actividad11xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad11xv }}%"></div>
+                                        {% elseif actividad11xv > 33.33 and actividad11xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad11xv }}%"></div>
+                                        {% elseif actividad11xv > 66.66  and actividad11xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad11xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad12 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad12xm = (totalm.actividad12*100)/actividad12m %}
+                                    {% set actividad12xv = (totalv.actividad12*100)/actividad12v %}
+                                    <small>M: {{ totalm.actividad12 }} de {{ actividad12m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad12xm > 0 and actividad12xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad12xm }}%"></div>
+                                        {% elseif actividad12xm > 33.33 and actividad12xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad12xm }}%"></div>
+                                        {% elseif actividad12xm > 66.66  and actividad12xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad12xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
+                                    <small> V: {{ totalv.actividad12 }} de {{ actividad12v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad12xv > 0 and actividad12xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad12xv }}%"></div>
+                                        {% elseif actividad12xv > 33.33 and actividad12xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad12xv }}%"></div>
+                                        {% elseif actividad12xv > 66.66  and actividad12xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad12xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad13 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad13xm = (totalm.actividad13*100)/actividad13m %}
+                                    {% set actividad13xv = (totalv.actividad13*100)/actividad13v %}
+                                    <small>M: {{ totalm.actividad13 }} de {{ actividad13m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad13xm > 0 and actividad13xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad13xm }}%"></div>
+                                        {% elseif actividad13xm > 33.33 and actividad13xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad13xm }}%"></div>
+                                        {% elseif actividad13xm > 66.66  and actividad13xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad13xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small> V: {{ totalv.actividad13 }} de {{ actividad13v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad13xv > 0 and actividad13xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad13xv }}%"></div>
+                                        {% elseif actividad13xv > 33.33 and actividad13xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad13xv }}%"></div>
+                                        {% elseif actividad13xv > 66.66  and actividad13xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad13xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad14 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad14xm = (totalm.actividad14*100)/actividad14m %}
+                                    {% set actividad14xv = (totalv.actividad14*100)/actividad14v %}
+                                    <small>M: {{ totalm.actividad14 }} de {{ actividad14m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad14xm > 0 and actividad14xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad14xm }}%"></div>
+                                        {% elseif actividad14xm > 33.33 and actividad14xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad14xm }}%"></div>
+                                        {% elseif actividad14xm > 66.66  and actividad14xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad14xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small> V: {{ totalv.actividad14 }} de {{ actividad14v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad14xv > 0 and actividad14xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad14xv }}%"></div>
+                                        {% elseif actividad14xv > 33.33 and actividad14xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad14xv }}%"></div>
+                                        {% elseif actividad14xv > 66.66  and actividad14xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad14xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad15 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad15xm = (totalm.actividad15*100)/actividad15m %}
+                                    {% set actividad15xv = (totalv.actividad15*100)/actividad15v %}
+                                    <small>M: {{ totalm.actividad15 }} de {{ actividad15m }}</small>
+                                    <div class="progress">
+                                        {% if  actividad15xm > 0 and actividad15xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad15xm }}%"></div>
+                                        {% elseif actividad15xm > 33.33 and actividad15xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad15xm }}%"></div>
+                                        {% elseif actividad15xm > 66.66  and actividad15xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad15xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small> V: {{ totalv.actividad15 }} de {{ actividad15v }}</small>
+                                    <div class="progress">
+                                        {% if  actividad15xv > 0 and actividad15xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad15xv }}%"></div>
+                                        {% elseif actividad15xv > 33.33 and actividad15xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad15xv }}%"></div>
+                                        {% elseif actividad15xv > 66.66  and actividad15xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad15xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted"><strong>{{ actividad16 }}</strong></p>
+                                </div>
+                                <div class="col-6">
+                                    {% set actividad16xm = (totalm.actividad16*100)/actividad16m %}
+                                    {% set actividad16xv = (totalv.actividad16*100)/actividad16v %}
+                                    <small>M: {{ totalm.actividad16 }} de {{ actividad16m }}</small>
+                                    <div class="progress progress-mini">
+                                        {% if  actividad16xm > 0 and actividad16xm <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad16xm }}%"></div>
+                                        {% elseif actividad16xm > 33.33 and actividad16xm <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad16xm }}%"></div>
+                                        {% elseif actividad16xm > 66.66  and actividad16xm <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad16xm }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <small>V: {{ totalv.actividad16 }} de {{ actividad16v }}</small>
+                                    <div class="progress progress-mini">
+                                        {% if  actividad16xv > 0 and actividad16xv <= 33.33 %}
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad16xv }}%"></div>
+                                        {% elseif actividad16xv > 33.33 and actividad16xv <= 66.66 %}
+                                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad16xv }}%"></div>
+                                        {% elseif actividad16xv > 66.66  and actividad16xv <= 100 %}
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ actividad16xv }}%"></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 px-1">
+                    <div class="card">
+                        <div class="card-body px-1 py-1">
+                            <div class="row">
+                                <div class="col-12 pb-2 text-muted">
+                                   <strong>Resumen</strong>
+                                </div>
+                                <div class="col-4">
+                                    {% set vegetarianos = 0 %}
+                                    {% for registro in registros %}
+                                        {% if registro.comida == true %}
+                                            {% set vegetarianos = vegetarianos + 1 %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% set mujeres = 0 %}
+                                    {% set hombres = 0 %}
+                                    {% for registro in registros %}
+                                        {% if registro.sexo == 0 and registro.sexo is not null %}
+                                            {% set mujeres = mujeres + 1 %}
+                                        {% elseif registro.sexo == 1 and registro.sexo is not null %}
+                                            {% set hombres = hombres + 1 %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <span class="badge badge-success">{{ mujeres }}</span>
+                                    Mujeres
+                                </div>
+                                <div class="col-8">
+                                    <span class="badge badge-success">{{ hombres }}</span>
+                                    Hombres
+                                </div>
+                                <div class="col-4">
+                                    <span class="badge badge-success">{{ registros|length }}</span> Registros activos
+                                </div>
+                                <div class="col-4">
+                                    <span class="badge badge-success">{{ noactivos|length }}</span> Registros inactivos
+                                </div>
+
+
+                                <div class="col-4">
+                                    <span class="badge badge-success">{{ vegetarianos }}</span>
+                                    Vegetarianos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 py-5">
+            <div class="table-responsive">
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>email</th>
+                        <th>Institución</th>
+                        <th>Carrera</th>
+                        <th>Matutino</th>
+                        <th>Vespertino</th>
+                        <th>Vegetariana</th>
+                        <th>Playera</th>
+                        <th>Talla</th>
+                        <th>Activo</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for registro in registros %}
+                        <tr>
+                            <td><a href="{{ path('registro_edit', { 'id': registro.id, 'mail': registro.mail }) }}">{{ registro.id }}</a></td>
+                            <td>{{ registro.paterno |title ~ ' ' ~ registro.materno |title ~ ' ' ~ registro.nombre |title }}</td>
+                            <td>{{ registro.mail }}</td>
+                            <td>{{ registro.institucion }}</td>
+                            <td>{{ registro.carrera }}</td>
+                            <td>{% for key,value in registro.actividadm if value %}
+                                    {#{{ key |title}}#}
+                                    {% set act = key|split('',9) %}
+                                    {% set nombre = 'actividad'~act.1  %}
+                                    {{ attribute(_context, nombre) }}
+                                    <br>
+                                {% endfor %}
+                            </td>
+                            <td>{% for key,value in registro.actividadv if value %}
+                                    {% set act = key|split('',9) %}
+                                    {% set nombre = 'actividad'~act.1  %}
+                                    {{ attribute(_context, nombre) }}
+                                    <br>
+                                {% endfor %}
+                            </td>
+                            <td class="text-center">{% if registro.comida == true %}
+                                    <span class="badge badge-success">Si</span>
+                                {% else %}
+                                    <span class="badge badge-danger">No</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">{% if registro.sexo == true %}
+                                    <span class="badge badge-primary"><i class="far fa-check-square"></i> Hombre</span>
+                                {% elseif registro.sexo is null %}
+                                    <span class="badge badge-warning "><i class="fa fa-check-exclamation"></i> <i class="fa fa-exclamation-circle"></i> Pendiente</span>
+                                {% elseif registro.sexo == false %}
+                                    <span class="badge badge-info "><i class="far fa-check-square"></i> Mujer</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">{{ registro.playera }}</td>
+                            <td class="text-center">{% if registro.activo == true %}
+                                    <span class="badge badge-success">Si</span>
+                                {% else %}
+                                    <span class="badge badge-danger">No</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ path('registro_edit', { 'id': registro.id, 'mail': registro.mail }) }}"><i class="far fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="correos">
+            <div class="modal-dialog modal-lg" id="correos">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Correos</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {% set total = 0 %}
+                                {% for registro in registros %}
+                                    {{ registro.mail }},
+                                    {% set total = total + 1 %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <br><br><strong>{{ total }} registros</strong>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    {% endblock %}
+
+        {% block javascripts %}
+            {{ parent() }}
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+            <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/datatables.min.js"></script>
+
+            {#            <script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>#}
+{#            <script src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script>#}
+{#            <script src="https://cdn.datatables.net/buttons/1.1.1/js/dataTables.buttons.min.js"></script>#}
+{#            <script src="https://cdn.datatables.net/buttons/1.1.1/js/buttons.bootstrap.min.js"></script>#}
+{#            <script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>#}
+{#            <script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>#}
+{#            <script type="text/javascript" language="javascript" src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>#}
+{#            <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.1.1/js/buttons.html5.min.js"></script>#}
+{#            <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.1.1/js/buttons.print.min.js"></script>#}
+{#            <script type="text/javascript" language="javascript" src="//cdn.datatables.net/buttons/1.1.1/js/buttons.colVis.min.js"></script>#}
+{#            <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/380cb78f450/integration/bootstrap/3/dataTables.bootstrap.js"></script>#}
+            <script type="text/javascript" class="init">
+                $(document).ready(function() {
+                    $('#example').DataTable ( {
+                        lengthChange: false,
+                        pageLength: 50,
+                        dom: 'Bfrtip',
+
+                        buttons: [
+                            {
+                                text: '<i class="far fa-copy"></i>',
+                                titleAttr: 'Copiar',
+                                extend: 'copyHtml5',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            {
+                                extend: 'csvHtml5',
+                                text: '<i class="fas fa-file-csv"></i>',
+                                titleAttr: 'CSV separado por comas',
+                                exportOptions: {
+                                    columns: ':visible'
+                                },
+                                fieldSeparator: ',',
+                                extension: '.csv'
+                            },
+
+                            // {
+                            //     extend: 'pdfHtml5',
+                            //     text: '<i class="far fa-file-pdf"></i>',
+                            //     titleAttr: 'PDF',
+                            //     exportOptions: {
+                            //         columns: ':visible'
+                            //     }
+                            // },
+                            {
+                                extend:'colvis',
+                                text: 'Columnas'
+                            }
+
+                        ],
+                        "pagingType": "full_numbers",
+                        "language": {
+                            buttons: {
+                                copyTitle: 'Copiado al portapapeles',
+                            },
+                            url: '//cdn.datatables.net/plug-ins/380cb78f450/i18n/Spanish.json'
+                        }
+                    } );
+
+                } );
+            </script>
+        {% endblock %}
