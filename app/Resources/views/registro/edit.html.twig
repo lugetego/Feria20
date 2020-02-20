@@ -211,22 +211,24 @@
                                     </div>
                                 </div>
 
-                                {% if edit_form.activo is defined %}
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <div class="font-weight-light">{{ form_label(edit_form.activo) }}</div>
-                                            <div>
-                                                {% spaceless %}
-                                                    {% for child in edit_form.activo %}
-                                                        <div class="form-check-inline">
-                                                            {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn font-weight-light'}}) }}
-                                                        </div>
-                                                    {% endfor %}
-                                                {% endspaceless %}
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    {% if edit_form.activo is defined %}
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <div class="font-weight-light">{{ form_label(edit_form.activo) }}</div>
+                                                <div>
+                                                    {% spaceless %}
+                                                        {% for child in edit_form.activo %}
+                                                            <div class="form-check-inline">
+                                                                {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn font-weight-light'}}) }}
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% endspaceless %}
+                                                </div>
+                                                <div>{{ form_errors(edit_form.activo) }}</div>
                                             </div>
-                                            <div>{{ form_errors(edit_form.activo) }}</div>
                                         </div>
-                                    </div>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                         </div>
