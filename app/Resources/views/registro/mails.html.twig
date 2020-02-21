@@ -12,6 +12,21 @@
                 </nav>
         {% endif %}
 
+        <div class="row pb-4">
+                <div class="col-sm-12">
+                        <div class="card">
+                                <div class="card-body">
+                                        <h5 class="card-title">Todos los correos de registros activos</h5>
+                                        {% set total = 0 %}
+                                        {% for registro in registros %}
+                                                {{ registro.mail }}
+                                                {% if not loop.last %},{% endif %}
+                                                {% set total = total + 1 %}
+                                        {% endfor %}
+                                </div>
+                        </div>
+                </div>
+        </div>
 
         <div class="row">
                 <div class="col-4">

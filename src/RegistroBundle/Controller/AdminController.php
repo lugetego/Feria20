@@ -59,12 +59,15 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $registros = $em->getRepository('RegistroBundle:Registro')->findByActivo(true);
+
         $totalm = $em->getRepository('RegistroBundle:Registro')->countActividad('actividadm');
         $totalv = $em->getRepository('RegistroBundle:Registro')->countActividad('actividadv');
 
         return $this->render('registro/mails.html.twig', array(
             'totalm' => $totalm,
-            'totalv' => $totalv
+            'totalv' => $totalv,
+            'registros'=> $registros
         ));
 
     }
