@@ -36,44 +36,44 @@ class RegistroController extends Controller
         ));
     }
 
-    /**
-     * Inicio de registro.
-     *
-     * @Route("/actividades", name="registro_inicio")
-     * @Method({"GET", "POST"})
-     */
-    public function startAction(Request $request)
-    {
-        $defaultData = array('message' => 'Type your message here');
-        $formail = $this->createFormBuilder($defaultData)
-            ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType',
-                array('label'=>'Ingresa el correo con el que te registraste'))
-            ->getForm();
-
-        $formail->handleRequest($request);
-
-        if ($formail->isValid()) {
-            // data is an array with "name", "email", and "message" keys
-            $mail = $formail->getData('mail');
-            $em = $this->getDoctrine()->getManager();
-            $registro = $em->getRepository('RegistroBundle:Registro')->findOneByMail($mail);
-
-            if (!$registro) {
-                throw $this->createNotFoundException(
-                    'Registro no encontrado'
-                );
-            }
-
-            return $this->render('registro/start.html.twig', array(
-                'registro' => $registro,
-            ));
-        }
-
-        return $this->render('registro/start.html.twig', array(
-            'form' => $formail->createView(),
-
-        ));
-    }
+//    /**
+//     * Inicio de registro.
+//     *
+//     * @Route("/actividades", name="registro_inicio")
+//     * @Method({"GET", "POST"})
+//     */
+//    public function startAction(Request $request)
+//    {
+//        $defaultData = array('message' => 'Type your message here');
+//        $formail = $this->createFormBuilder($defaultData)
+//            ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType',
+//                array('label'=>'Ingresa el correo con el que te registraste'))
+//            ->getForm();
+//
+//        $formail->handleRequest($request);
+//
+//        if ($formail->isValid()) {
+//            // data is an array with "name", "email", and "message" keys
+//            $mail = $formail->getData('mail');
+//            $em = $this->getDoctrine()->getManager();
+//            $registro = $em->getRepository('RegistroBundle:Registro')->findOneByMail($mail);
+//
+//            if (!$registro) {
+//                throw $this->createNotFoundException(
+//                    'Registro no encontrado'
+//                );
+//            }
+//
+//            return $this->render('registro/start.html.twig', array(
+//                'registro' => $registro,
+//            ));
+//        }
+//
+//        return $this->render('registro/start.html.twig', array(
+//            'form' => $formail->createView(),
+//
+//        ));
+//    }
 
 
     public function limiteActividad($actividad,$horario,$turno)
