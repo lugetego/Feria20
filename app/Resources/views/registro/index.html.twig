@@ -708,6 +708,7 @@
                         <th>Vegetariana</th>
                         <th>Playera</th>
                         <th>Talla</th>
+                        <th>Tipo</th>
                         <th>Activo</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -750,6 +751,7 @@
                                 {% endif %}
                             </td>
                             <td class="text-center">{{ registro.playera }}</td>
+                            <td class="text-center">{{ registro.tipo | title}}</td>
                             <td class="text-center">{% if registro.activo == true %}
                                     <span class="badge badge-success">Si</span>
                                 {% else %}
