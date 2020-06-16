@@ -452,4 +452,67 @@ class RegistroController extends Controller
             ->getForm()
             ;
     }
+
+    /**
+     * Download file
+     *
+     * @Route("/descarga/constancia", name="registro_constancia")
+     * @Method({"GET", "POST"})
+     */
+    public function constanciaAction(Request $request)
+    {
+
+        $defaultData = array('message' => 'Type your message here');
+        $formail = $this->createFormBuilder($defaultData)
+            ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType',array
+            ('label'=>'Ingresa el correo con el que te registraste para descargar tu constancia'))
+            ->getForm();
+
+        $formail->handleRequest($request);
+
+        if ($formail->isValid()) {
+            // data is an array with "name", "email", and "message" keys
+            $mail = $formail->getData('mail');
+            $em = $this->getDoctrine()->getManager();
+            $registro = $em->getRepository('RegistroBundle:Registro')->findOneByMail($mail);
+
+            if (!$registro) {
+                throw $this->createNotFoundException(
+                    'Registro no encontrado'
+                );
+            }
+
+            $email= strtolower($mail['email']);
+            $pdf= "http://gaspacho.matmor.unam.mx/feria20/files/".$email.".pdf";
+
+            $headers=get_headers($pdf, 1);
+            if ($headers[0]!='HTTP/1.1 200 OK') {
+                throw $this->createNotFoundException(
+                    'Archivo no encontrado'
+                );
+            }
+            else {
+
+                $mailer = $this->get('mailer');
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Descarga de constancia - '. $this->getParameter('evento'))
+                    ->setFrom('webmaster@matmor.unam.mx')
+//                    ->setTo(array($registro->getMail()))
+                    ->setBcc(array('gerardo@matmor.unam.mx'))
+                    ->setBody($this->renderView('registro/descargaConstancia.txt.twig', array('entity' => $registro,'pdf'=>$pdf)));
+                $mailer->send($message);
+
+                return $this->redirect($pdf);
+
+            }
+
+
+        }
+
+        return $this->render('registro/constancia.html.twig', array(
+            'form' => $formail->createView(),
+
+        ));
+    }
 }

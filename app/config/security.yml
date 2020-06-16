@@ -47,6 +47,7 @@ security:
         - { path: ^/registro/actividades, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/registro/voluntario, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/registro/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/registro/descarga/constancia, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/registro/.+/edit/.+, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/registro/.+/edit/.+, roles: ROLE_ADMIN }
         - { path: ^/admin, roles: ROLE_ADMIN }
